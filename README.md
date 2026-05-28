@@ -21,7 +21,23 @@ The initial focus is on OpenAI API developer support workflows.
 
 The application should help answer questions such as:
 
-1. What issues occur most frequently?
+1. What issues occur most frequently?## Environment
+
+Copy the example files before running locally:
+
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env.local
+```
+
+Do not put secrets in the Dockerfile as `ARG` or `ENV` values. For containers,
+provide secrets through Docker secrets or runtime environment variables. The
+backend also supports `POSTGRES_PASSWORD_FILE` for file-mounted secrets.
+
+The MVP keeps Gemini and embedding interfaces versioned, but uses deterministic
+local extraction/embedding behavior so the pipeline can be tested without
+network credentials. Production Gemini and embedding calls should be added
+behind the existing service boundaries.
 
    * Example: streaming failures, retries, async handling, rate limits
 
@@ -353,20 +369,7 @@ A local pgvector-enabled PostgreSQL service is defined in
 Use the `postgres` service from `docker/docker-compose.yml` when only the local
 database is needed.
 
-## Environment
+## Sample Product Image
 
-Copy the example files before running locally:
+<img width="1281" height="700" alt="image" src="https://github.com/user-attachments/assets/23a23ef9-0b04-443b-9121-3d2056c09879" />
 
-```bash
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env.local
-```
-
-Do not put secrets in the Dockerfile as `ARG` or `ENV` values. For containers,
-provide secrets through Docker secrets or runtime environment variables. The
-backend also supports `POSTGRES_PASSWORD_FILE` for file-mounted secrets.
-
-The MVP keeps Gemini and embedding interfaces versioned, but uses deterministic
-local extraction/embedding behavior so the pipeline can be tested without
-network credentials. Production Gemini and embedding calls should be added
-behind the existing service boundaries.
