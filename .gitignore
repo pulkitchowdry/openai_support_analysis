@@ -1,0 +1,7 @@
+.env
+**/.env
+**/__pycache__/
+.agents
+.codex
+**/node_modules/
+**/.pytest_cache
